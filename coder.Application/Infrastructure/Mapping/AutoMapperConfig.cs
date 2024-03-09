@@ -14,7 +14,8 @@ namespace coder.Application.Infrastructure.Mapping
         public AutoMapperConfig()
         {
             CreateMap<Usuario, GetUsuarioResponse>()
-                .ForMember(dest => dest.Usuario, opt => opt.MapFrom(src => src));
+                .ForMember(dest => dest.Usuario, opt => opt.MapFrom(src => src))
+                .ForMember(dest => dest.Message, opt => opt.MapFrom(src => "Usuario econtrado correctamente."));
         }
     }
 }

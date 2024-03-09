@@ -32,7 +32,7 @@ namespace coder.Application.Features.Usuarios.Queries.GetUsuario
         {
             var usuario = await _usuario.GetSingleOrDefaultAsync(x => x.Id == request.Id);
             
-            return usuario == null ? throw new UsuarioNotFoundException() : _mapper.Map<GetUsuarioResponse>(usuario);
+            return usuario == null ?  throw new UsuarioNotFoundException() : _mapper.Map<GetUsuarioResponse>(usuario);
         }
     }
 }

@@ -1,16 +1,13 @@
-﻿using coder.ErrorHandling.Exceptions;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using coder.Application.Domain.Entities;
+using coder.ErrorHandling.Exceptions;
 
 namespace coder.Application.Common.Exceptions.Usuarios
 {
-    internal class UsuarioNotFoundException: NotFoundException
+    public class UsuarioNotFoundException : NotFoundException
     {
-        public UsuarioNotFoundException() : base("El usuario no fue encontrado.")
-        {
-        }
+        public UsuarioNotFoundException()
+            : base("El usuario no fue encontrado.") { }
+
+        public object ErrorResponse => new { Message, Usuario = (Usuario)null, };
     }
 }

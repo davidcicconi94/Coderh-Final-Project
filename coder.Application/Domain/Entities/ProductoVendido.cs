@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace Coderh_Final_Project.Domain.Model
+namespace coder.Application.Domain.Entities
 {
     public partial class ProductoVendido
     {

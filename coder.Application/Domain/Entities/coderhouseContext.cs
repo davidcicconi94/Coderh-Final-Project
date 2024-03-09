@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata;
 
-namespace Coderh_Final_Project.Domain.Model
+namespace coder.Application.Domain.Entities
 {
     public partial class coderhouseContext : DbContext
     {

@@ -66,7 +66,7 @@ namespace Coderh_Final_Project.Controllers
 
                 return Ok(response);
             }
-            catch (UsuarioNotFoundException ex)
+            catch (VentasNotFoundException ex)
             {
                 var errorResponse = ex.ErrorResponse;
 

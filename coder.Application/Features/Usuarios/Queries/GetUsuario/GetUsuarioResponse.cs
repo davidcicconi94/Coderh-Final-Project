@@ -1,4 +1,4 @@
-﻿using coder.Application.Common.DTOs;
+﻿using coder.Application.Domain.Entities;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -10,6 +10,6 @@ namespace coder.Application.Features.Usuarios.Queries.GetUsuario
     public class GetUsuarioResponse
     {
         public string Message { get; set; }
-        public object Usuario { get; set; }
+        public Usuario Usuario { get; set; }
     }
 }

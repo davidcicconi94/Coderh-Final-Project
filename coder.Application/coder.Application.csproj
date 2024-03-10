@@ -19,8 +19,6 @@
 
   <ItemGroup>
     <Folder Include="Domain\" />
-    <Folder Include="Features\Usuarios\Commands\" />
-    <Folder Include="Features\Usuarios\Queries\GetUsuarios\" />
   </ItemGroup>
 
   <ItemGroup>

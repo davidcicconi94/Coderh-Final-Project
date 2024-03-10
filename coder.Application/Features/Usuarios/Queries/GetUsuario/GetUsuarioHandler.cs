@@ -1,14 +1,10 @@
 ﻿using AutoMapper;
+using coder.Application.Common.DTOs;
 using coder.Application.Common.Exceptions.Usuarios;
 using coder.Application.Domain.Entities;
 using coder.Application.Infrastructure;
-using coder.ErrorHandling.Exceptions;
 using MediatR;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+
 
 namespace coder.Application.Features.Usuarios.Queries.GetUsuario
 {
@@ -16,10 +12,12 @@ namespace coder.Application.Features.Usuarios.Queries.GetUsuario
     {
         private readonly IMapper _mapper;
         private readonly IGenericRepository<Usuario> _usuario;
-        public GetUsuarioHandler(IMapper mapper, IGenericRepository<Usuario> usuario)
+        private readonly IGenericRepository<Producto> _producto;
+        public GetUsuarioHandler(IMapper mapper, IGenericRepository<Usuario> usuario, IGenericRepository<Producto> producto)
         {
             _mapper = mapper;
             _usuario = usuario;
+            _producto = producto;
         }
 
         public async Task<GetUsuarioResponse> Handle(GetUsuarioRequest request, CancellationToken cancellationToken)
@@ -31,8 +29,22 @@ namespace coder.Application.Features.Usuarios.Queries.GetUsuario
         public async Task<GetUsuarioResponse> GetUsuario(GetUsuarioRequest request)
         {
             var usuario = await _usuario.GetSingleOrDefaultAsync(x => x.Id == request.Id);
-            
-            return usuario == null ?  throw new UsuarioNotFoundException() : _mapper.Map<GetUsuarioResponse>(usuario);
+
+            if (usuario == null)
+            {
+                throw new UsuarioNotFoundException();
+            }
+
+            var productos = await _producto.GetAllAsync(x => x.IdUsuario == request.Id);
+
+            foreach (var producto in productos)
+            {
+                usuario.Productos.Add(producto);
+            }
+
+            var usuarioDto = _mapper.Map<UsuarioDTO>(usuario);
+
+            return usuario == null ?  throw new UsuarioNotFoundException() : _mapper.Map<GetUsuarioResponse>(usuarioDto);
         }
     }
 }

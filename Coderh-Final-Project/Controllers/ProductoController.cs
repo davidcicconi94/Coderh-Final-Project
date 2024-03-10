@@ -1,6 +1,8 @@
 ﻿using coder.Application.Common.Exceptions.Productos;
+using coder.Application.Features.Productos.Commands.CreateProduct;
 using coder.Application.Features.Productos.Queries.GetProducto;
 using coder.Application.Features.Productos.Queries.GetProductos;
+using coder.Application.Features.Usuarios.Commands.CreateUsuario;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
 
@@ -50,6 +52,21 @@ namespace Coderh_Final_Project.Controllers
                 var errorResponse = ex.ErrorResponse;
 
                 return NotFound(errorResponse);
+            }
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> CreateProducto([FromBody] CreateProductRequest request)
+        {
+            try
+            {
+                var response = await _mediator.Send(request);
+
+                return Ok(response);
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, new CreateProductResponse { Message = $"Error al crear el producto: {ex.Message}" });
             }
         }
     }

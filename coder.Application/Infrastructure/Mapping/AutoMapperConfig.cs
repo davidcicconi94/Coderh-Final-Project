@@ -1,5 +1,7 @@
 ﻿using AutoMapper;
+using coder.Application.Common.DTOs;
 using coder.Application.Domain.Entities;
+using coder.Application.Features.Productos.Commands.CreateProduct;
 using coder.Application.Features.Productos.Queries.GetProducto;
 using coder.Application.Features.Productos.Queries.GetProductos;
 using coder.Application.Features.Usuarios.Commands.CreateUsuario;
@@ -16,9 +18,17 @@ namespace coder.Application.Infrastructure.Mapping
         public AutoMapperConfig()
         {
             #region Usuarios
-            CreateMap<Usuario, GetUsuarioResponse>()
-           .ForMember(dest => dest.Usuario, opt => opt.MapFrom(src => src))
-           .ForMember(dest => dest.Message, opt => opt.MapFrom(src => "Usuario econtrado correctamente."));
+            CreateMap<Usuario, UsuarioDTO>()
+               .ForMember(dest => dest.Id, opt => opt.MapFrom(src => src.Id))
+               .ForMember(dest => dest.Nombre, opt => opt.MapFrom(src => src.Nombre))
+               .ForMember(dest => dest.NombreUsuario, opt => opt.MapFrom(src => src.NombreUsuario))
+               .ForMember(dest => dest.Contraseña, opt => opt.MapFrom(src => src.Contraseña))
+               .ForMember(dest => dest.Mail, opt => opt.MapFrom(src => src.Mail))
+               .ForMember(dest => dest.Productos, opt => opt.MapFrom(src => src.Productos));
+
+            CreateMap<UsuarioDTO, GetUsuarioResponse>()
+               .ForMember(dest => dest.Usuario, opt => opt.MapFrom(src => src))
+               .ForMember(dest => dest.Message, opt => opt.MapFrom(src => "Usuario econtrado correctamente."));
 
             CreateMap<IEnumerable<Usuario>, GetUsuariosResponse>()
                 .ForMember(dest => dest.Usuarios, opt => opt.MapFrom(src => src))
@@ -46,6 +56,9 @@ namespace coder.Application.Infrastructure.Mapping
             #endregion
 
             #region Productos
+            CreateMap<Producto, ProductoDTO>()
+                .PreserveReferences();
+
             CreateMap<Producto, GetProductoResponse>()
                 .ForMember(dest => dest.Producto, opt => opt.MapFrom(src => src))
                 .ForMember(dest => dest.Message, opt => opt.MapFrom(src => "Producto econtrado correctamente."));
@@ -54,7 +67,12 @@ namespace coder.Application.Infrastructure.Mapping
                 .ForMember(dest => dest.Productos, opt => opt.MapFrom(src => src))
                 .ForMember(dest => dest.Message, opt => opt.MapFrom(src => "Usuarios encontrados correctamente."));
 
-
+            CreateMap<CreateProductRequest, Producto>()
+                .ForMember(dest => dest.Descripciones, opt => opt.MapFrom(src => src.Descripciones))
+                .ForMember(dest => dest.Costo, opt => opt.MapFrom(src => src.Costo))
+                .ForMember(dest => dest.PrecioVenta, opt => opt.MapFrom(src => src.PrecioVenta))
+                .ForMember(dest => dest.Stock, opt => opt.MapFrom(src => src.Stock))
+                .ForMember(dest => dest.IdUsuario, opt => opt.MapFrom(src => src.IdUsuario));
 
             #endregion
 

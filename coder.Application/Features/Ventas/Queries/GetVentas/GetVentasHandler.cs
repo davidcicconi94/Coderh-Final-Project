@@ -1,10 +1,7 @@
 ﻿using AutoMapper;
 using coder.Application.Common.DTOs;
-using coder.Application.Common.Exceptions.ProductosVendidos;
 using coder.Application.Common.Exceptions.Ventas;
 using coder.Application.Domain.Entities;
-using coder.Application.Features.Productos.Queries.GetProductos;
-using coder.Application.Features.ProductosVendidos.Queries.GetProductosVendidos;
 using coder.Application.Infrastructure;
 using MediatR;
 

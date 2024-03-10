@@ -13,6 +13,7 @@ using coder.Application.Features.Usuarios.Commands.UpdateUsuario;
 using coder.Application.Features.Usuarios.Queries.GetUsuario;
 using coder.Application.Features.Usuarios.Queries.GetUsuarioByCredentials;
 using coder.Application.Features.Usuarios.Queries.GetUsuarios;
+using coder.Application.Features.Ventas.Commands.CreateVenta;
 using coder.Application.Features.Ventas.Queries.GetVentas;
 
 namespace coder.Application.Infrastructure.Mapping
@@ -105,6 +106,9 @@ namespace coder.Application.Infrastructure.Mapping
             CreateMap<IEnumerable<VentumDTO>, GetVentasResponse>()
                 .ForMember(dest => dest.Message, opt => opt.MapFrom(src => "Ventas encontradas correctamente."))
                 .ForMember(dest => dest.Ventas, opt => opt.MapFrom(src => src));
+
+            CreateMap<CreateVentaRequest, Ventum>();
+           
             #endregion
 
         }

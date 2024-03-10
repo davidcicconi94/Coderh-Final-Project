@@ -19,7 +19,6 @@
 
   <ItemGroup>
     <Folder Include="Domain\" />
-    <Folder Include="Features\Ventas\Queries\GetVentaByUserId\" />
   </ItemGroup>
 
   <ItemGroup>

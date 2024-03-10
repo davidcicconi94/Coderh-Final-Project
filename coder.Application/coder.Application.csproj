@@ -19,6 +19,7 @@
 
   <ItemGroup>
     <Folder Include="Domain\" />
+    <Folder Include="Features\Productos\Commands\" />
   </ItemGroup>
 
   <ItemGroup>

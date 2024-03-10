@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using coder.Application.Domain.Entities;
+using coder.Application.Features.Productos.Queries.GetProducto;
 using coder.Application.Features.Usuarios.Commands.CreateUsuario;
 using coder.Application.Features.Usuarios.Commands.DeleteUsuario;
 using coder.Application.Features.Usuarios.Commands.UpdateUsuario;
@@ -13,9 +14,10 @@ namespace coder.Application.Infrastructure.Mapping
     {
         public AutoMapperConfig()
         {
+            #region Usuarios
             CreateMap<Usuario, GetUsuarioResponse>()
-                .ForMember(dest => dest.Usuario, opt => opt.MapFrom(src => src))
-                .ForMember(dest => dest.Message, opt => opt.MapFrom(src => "Usuario econtrado correctamente."));
+           .ForMember(dest => dest.Usuario, opt => opt.MapFrom(src => src))
+           .ForMember(dest => dest.Message, opt => opt.MapFrom(src => "Usuario econtrado correctamente."));
 
             CreateMap<IEnumerable<Usuario>, GetUsuariosResponse>()
                 .ForMember(dest => dest.Usuarios, opt => opt.MapFrom(src => src))
@@ -40,6 +42,14 @@ namespace coder.Application.Infrastructure.Mapping
 
             CreateMap<Usuario, DeleteUsuarioResponse>()
                 .ForMember(dest => dest.Message, opt => opt.MapFrom(src => "Usuario eliminado correctamente."));
+            #endregion
+
+            #region Productos
+            CreateMap<Producto, GetProductoResponse>()
+                .ForMember(dest => dest.Producto, opt => opt.MapFrom(src => src))
+                .ForMember(dest => dest.Message, opt => opt.MapFrom(src => "Producto econtrado correctamente."));
+            #endregion
+
         }
     }
 }

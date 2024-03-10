@@ -30,9 +30,9 @@ namespace coder.Application.Infrastructure.Mapping
                .ForMember(dest => dest.Usuario, opt => opt.MapFrom(src => src))
                .ForMember(dest => dest.Message, opt => opt.MapFrom(src => "Usuario econtrado correctamente."));
 
-            CreateMap<IEnumerable<Usuario>, GetUsuariosResponse>()
-                .ForMember(dest => dest.Usuarios, opt => opt.MapFrom(src => src))
-                .ForMember(dest => dest.Message, opt => opt.MapFrom(src => "Usuarios encontrados correctamente."));
+            CreateMap<IEnumerable<UsuarioDTO>, GetUsuariosResponse>()
+                .ForMember(dest => dest.Message, opt => opt.MapFrom(src => src.Any() ? "Usuarios encontrados correctamente." : "No se encontraron usuarios."))
+                .ForMember(dest => dest.Usuarios, opt => opt.MapFrom(src => src));
 
             CreateMap<CreateUsuarioRequest, Usuario>()
                 .ForMember(dest => dest.Nombre, opt => opt.MapFrom(src => src.Nombre))

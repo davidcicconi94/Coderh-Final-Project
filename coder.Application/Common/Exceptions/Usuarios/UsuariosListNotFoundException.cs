@@ -1,4 +1,4 @@
-﻿using coder.Application.Domain.Entities;
+﻿using coder.Application.Common.DTOs;
 using coder.ErrorHandling.Exceptions;
 
 namespace coder.Application.Common.Exceptions.Usuarios
@@ -11,6 +11,6 @@ namespace coder.Application.Common.Exceptions.Usuarios
         {
             
         }
-        public object ErrorResponse => new { Message, Usuarios = (IEnumerable<Usuario>)null, };
+        public object ErrorResponse => new { Message, Usuarios = (IEnumerable<UsuarioDTO>)null, };
     }
 }

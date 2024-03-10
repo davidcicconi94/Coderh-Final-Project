@@ -1,6 +1,7 @@
 ﻿using coder.Application.Common.Exceptions.Usuarios;
 using coder.Application.Domain.Entities;
 using coder.Application.Features.Usuarios.Commands.CreateUsuario;
+using coder.Application.Features.Usuarios.Commands.DeleteUsuario;
 using coder.Application.Features.Usuarios.Commands.UpdateUsuario;
 using coder.Application.Features.Usuarios.Queries.GetUsuario;
 using coder.Application.Features.Usuarios.Queries.GetUsuarioByCredentials;
@@ -90,7 +91,7 @@ namespace Coderh_Final_Project.Controllers
         }
 
         [HttpPut]
-        public async Task<IActionResult> UpdateUserProfile([FromBody] UpdateUsuarioRequest request)
+        public async Task<IActionResult> UpdateUsuario([FromBody] UpdateUsuarioRequest request)
         {
             try
             {
@@ -101,6 +102,25 @@ namespace Coderh_Final_Project.Controllers
             catch (Exception ex)
             {
                 return StatusCode(500, new UpdateUsuarioResponse { Message = $"Error al modificar el usuario: {ex.Message}" });
+            }
+        }
+
+        [HttpDelete("{id}")]
+        public async Task<IActionResult> DeleteUsuario([FromRoute] int id)
+        {
+            try
+            {
+                var query = new DeleteUsuarioRequest { Id = id };
+
+                var response = await _mediator.Send(query);
+
+                return Ok(response);
+            }
+            catch (UsuarioNotFoundException ex) 
+            {
+                var errorResponse = ex.ErrorResponse;
+
+                return NotFound(errorResponse);
             }
         }
     }

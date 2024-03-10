@@ -1,6 +1,7 @@
 ﻿using AutoMapper;
 using coder.Application.Domain.Entities;
 using coder.Application.Features.Usuarios.Commands.CreateUsuario;
+using coder.Application.Features.Usuarios.Commands.DeleteUsuario;
 using coder.Application.Features.Usuarios.Commands.UpdateUsuario;
 using coder.Application.Features.Usuarios.Queries.GetUsuario;
 using coder.Application.Features.Usuarios.Queries.GetUsuarioByCredentials;
@@ -36,6 +37,9 @@ namespace coder.Application.Infrastructure.Mapping
 
             CreateMap<Usuario, GetUsuarioByCredentialsResponse>()
                 .ForMember(dest => dest.Message, opt => opt.MapFrom(src => "Inicio de sesión correcto. Bienvenido nuevamente!."));
+
+            CreateMap<Usuario, DeleteUsuarioResponse>()
+                .ForMember(dest => dest.Message, opt => opt.MapFrom(src => "Usuario eliminado correctamente."));
         }
     }
 }

@@ -1,9 +1,12 @@
 ﻿using coder.Application.Common.Exceptions.Usuarios;
 using coder.Application.Domain.Entities;
 using coder.Application.Features.Usuarios.Commands.CreateUsuario;
+using coder.Application.Features.Usuarios.Commands.UpdateUsuario;
 using coder.Application.Features.Usuarios.Queries.GetUsuario;
+using coder.Application.Features.Usuarios.Queries.GetUsuarioByCredentials;
 using coder.Application.Features.Usuarios.Queries.GetUsuarios;
 using MediatR;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Coderh_Final_Project.Controllers
@@ -30,6 +33,22 @@ namespace Coderh_Final_Project.Controllers
                 return Ok(response);
             }
             catch (UsuariosListNotFoundException ex) 
+            {
+                var errorResponse = ex.ErrorResponse;
+
+                return NotFound(errorResponse);
+            }
+        }
+
+        [HttpGet("login")]
+        public async Task<IActionResult> GetUsuariosByCredentials([FromQuery] GetUsuarioByCredentialsRequest request)
+        {
+            try
+            {
+                var response = await _mediator.Send(request);
+                return Ok(response);
+            }
+            catch(UsuarionCannotLoginException ex)
             {
                 var errorResponse = ex.ErrorResponse;
 
@@ -67,6 +86,21 @@ namespace Coderh_Final_Project.Controllers
             catch (Exception ex)
             {
                 return StatusCode(500, new CreateUsuarioResponse { Message = $"Error al crear el usuario: {ex.Message}" });
+            }
+        }
+
+        [HttpPut]
+        public async Task<IActionResult> UpdateUserProfile([FromBody] UpdateUsuarioRequest request)
+        {
+            try
+            {
+                var response = await _mediator.Send(request);
+
+                return Ok(response);
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, new UpdateUsuarioResponse { Message = $"Error al modificar el usuario: {ex.Message}" });
             }
         }
     }

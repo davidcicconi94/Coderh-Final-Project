@@ -1,12 +1,7 @@
 ﻿using coder.Application.Infrastructure;
 using Microsoft.EntityFrameworkCore.Query;
 using Microsoft.EntityFrameworkCore;
-using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Linq.Expressions;
-using System.Text;
-using System.Threading.Tasks;
 using coder.DataAccess.Data;
 
 namespace coder.DataAccess.Persistance
@@ -68,6 +63,11 @@ namespace coder.DataAccess.Persistance
             }
 
             return await query.FirstOrDefaultAsync(filter);
+        }
+
+        public async Task<T?> GetSingleAsync(Expression<Func<T, bool>>? filter = null)
+        {
+            return (filter != null) ? await _dbSet.FirstOrDefaultAsync(filter) : await _dbSet.FirstOrDefaultAsync();
         }
 
         public async Task<T?> GetSingleByIdAsync(object id)

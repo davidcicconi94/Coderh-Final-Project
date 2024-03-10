@@ -15,6 +15,7 @@ namespace coder.Application.Infrastructure
                                        Func<IQueryable<T>, IOrderedQueryable<T>>? orderBy = null,
                                        List<Func<IQueryable<T>, IIncludableQueryable<T, object>>>? includes = null);
         Task<T?> GetSingleOrDefaultAsync(Expression<Func<T, bool>> filter, List<Func<IQueryable<T>, IIncludableQueryable<T, object>>>? includes = null);
+        Task<T?> GetSingleAsync(Expression<Func<T, bool>>? filter = null);
         Task<T?> GetSingleByIdAsync(object id);
         Task<bool> ExistsAsync(Expression<Func<T, bool>> filter);
         Task AddAsync(T entity);

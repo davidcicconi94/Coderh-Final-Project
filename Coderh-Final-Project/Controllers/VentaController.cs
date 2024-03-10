@@ -3,6 +3,7 @@ using coder.Application.Common.Exceptions.Ventas;
 using coder.Application.Features.Usuarios.Commands.CreateUsuario;
 using coder.Application.Features.Usuarios.Commands.DeleteUsuario;
 using coder.Application.Features.Ventas.Commands.CreateVenta;
+using coder.Application.Features.Ventas.Commands.DeleteVenta;
 using coder.Application.Features.Ventas.Queries.GetVentas;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
@@ -60,13 +61,13 @@ namespace Coderh_Final_Project.Controllers
         {
             try
             {
-                var query = new DeleteUsuarioRequest { Id = id };
+                var query = new DeleteVentaRequest { Id = id };
 
                 var response = await _mediator.Send(query);
 
                 return Ok(response);
             }
-            catch (VentasNotFoundException ex)
+            catch (VentaNotFoundException ex)
             {
                 var errorResponse = ex.ErrorResponse;
 

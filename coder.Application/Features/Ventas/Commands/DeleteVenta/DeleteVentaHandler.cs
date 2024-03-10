@@ -3,6 +3,7 @@ using coder.Application.Common.Exceptions.Usuarios;
 using coder.Application.Common.Exceptions.Ventas;
 using coder.Application.Domain.Entities;
 using coder.Application.Features.Usuarios.Commands.DeleteUsuario;
+using coder.Application.Features.Ventas.Commands.CreateVenta;
 using coder.Application.Infrastructure;
 using MediatR;
 
@@ -18,19 +19,26 @@ namespace coder.Application.Features.Ventas.Commands.DeleteVenta
             _mapper = mapper;
             _venta = venta;
         }
-        public Task<DeleteVentaResponse> Handle(DeleteVentaRequest request, CancellationToken cancellationToken)
+        public async Task<DeleteVentaResponse> Handle(DeleteVentaRequest request, CancellationToken cancellationToken)
         {
-            throw new NotImplementedException();
+            DeleteVentaResponse venta = await GetVenta(request);
+
+            return venta;
         }
         public async Task<DeleteVentaResponse> GetVenta(DeleteVentaRequest request)
         {
             var venta = await _venta.GetSingleOrDefaultAsync(x => x.Id == request.Id);
 
+            if(venta == null)
+            {
+                throw new VentaNotFoundException();
+            }
+
             await _venta.DeleteAsync(venta);
 
             await _venta.SaveChangesAsync();
             
-            return venta == null ? throw new VentasNotFoundException() : _mapper.Map<DeleteVentaResponse>(venta);
+            return venta == null ? throw new VentaNotFoundException() : _mapper.Map<DeleteVentaResponse>(venta);
         }
     }
 }

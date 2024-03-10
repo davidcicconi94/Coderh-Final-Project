@@ -14,6 +14,7 @@ using coder.Application.Features.Usuarios.Queries.GetUsuario;
 using coder.Application.Features.Usuarios.Queries.GetUsuarioByCredentials;
 using coder.Application.Features.Usuarios.Queries.GetUsuarios;
 using coder.Application.Features.Ventas.Commands.CreateVenta;
+using coder.Application.Features.Ventas.Commands.DeleteVenta;
 using coder.Application.Features.Ventas.Queries.GetVentas;
 
 namespace coder.Application.Infrastructure.Mapping
@@ -108,7 +109,10 @@ namespace coder.Application.Infrastructure.Mapping
                 .ForMember(dest => dest.Ventas, opt => opt.MapFrom(src => src));
 
             CreateMap<CreateVentaRequest, Ventum>();
-           
+
+            CreateMap<Ventum, DeleteVentaResponse>()
+                .ForMember(dest => dest.Message, opt => opt.MapFrom(src => "Venta eliminada correctamente."));
+
             #endregion
 
         }

@@ -1,12 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace coder.Application.Features.Productos.Commands.UpdateProduct
+﻿namespace coder.Application.Features.Productos.Commands.UpdateProduct
 {
-    internal class UpdateProductResponse
+    public class UpdateProductResponse
     {
+        public string Message { get; set; }
     }
 }

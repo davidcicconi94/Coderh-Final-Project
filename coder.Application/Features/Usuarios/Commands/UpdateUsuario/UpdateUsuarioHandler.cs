@@ -25,6 +25,7 @@ namespace coder.Application.Features.Usuarios.Commands.UpdateUsuario
             {
                 throw new UsuarioNotFoundException();
             }
+
             return await UpdateUsuario(request);
         }
 

@@ -2,6 +2,7 @@
 using coder.Application.Common.DTOs;
 using coder.Application.Domain.Entities;
 using coder.Application.Features.Productos.Commands.CreateProduct;
+using coder.Application.Features.Productos.Commands.UpdateProduct;
 using coder.Application.Features.Productos.Queries.GetProducto;
 using coder.Application.Features.Productos.Queries.GetProductos;
 using coder.Application.Features.Usuarios.Commands.CreateUsuario;
@@ -59,13 +60,21 @@ namespace coder.Application.Infrastructure.Mapping
             CreateMap<Producto, ProductoDTO>()
                 .PreserveReferences();
 
+            CreateMap<UpdateProductRequest, Producto>()
+                .ForMember(dest => dest.Id, opt => opt.MapFrom(src => src.Id))
+                .ForMember(dest => dest.Descripciones, opt => opt.MapFrom(src => src.Descripciones))
+                .ForMember(dest => dest.Costo, opt => opt.MapFrom(src => src.Costo))
+                .ForMember(dest => dest.Stock, opt => opt.MapFrom(src => src.Stock))
+                .ForMember(dest => dest.IdUsuario, opt => opt.MapFrom(src => src.IdUsuario))
+                .ForMember(dest => dest.PrecioVenta, opt => opt.MapFrom(src => src.PrecioVenta));
+
             CreateMap<Producto, GetProductoResponse>()
                 .ForMember(dest => dest.Producto, opt => opt.MapFrom(src => src))
                 .ForMember(dest => dest.Message, opt => opt.MapFrom(src => "Producto econtrado correctamente."));
 
             CreateMap<IEnumerable<Producto>, GetProductosResponse>()
                 .ForMember(dest => dest.Productos, opt => opt.MapFrom(src => src))
-                .ForMember(dest => dest.Message, opt => opt.MapFrom(src => "Usuarios encontrados correctamente."));
+                .ForMember(dest => dest.Message, opt => opt.MapFrom(src => "Productos encontrados correctamente."));
 
             CreateMap<CreateProductRequest, Producto>()
                 .ForMember(dest => dest.Descripciones, opt => opt.MapFrom(src => src.Descripciones))

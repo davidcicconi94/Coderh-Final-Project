@@ -2,7 +2,6 @@
 using coder.Application.Common.DTOs;
 using coder.Application.Common.Exceptions.Usuarios;
 using coder.Application.Domain.Entities;
-using coder.Application.Features.Usuarios.Queries.GetUsuario;
 using coder.Application.Infrastructure;
 using MediatR;
 

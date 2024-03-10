@@ -7,7 +7,7 @@ namespace coder.Application.Common.Exceptions.Usuarios
     {
 
         public UsuariosListNotFoundException()
-            : base ("No se pudo obtener la lista de usuarios")
+            : base ("No se pudo obtener la lista de usuarios.")
         {
             
         }

@@ -1,5 +1,6 @@
 ﻿using coder.Application.Common.Exceptions.Productos;
 using coder.Application.Features.Productos.Queries.GetProducto;
+using coder.Application.Features.Productos.Queries.GetProductos;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
 
@@ -31,6 +32,24 @@ namespace Coderh_Final_Project.Controllers
                 var errorResponse = ex.ErrorResponse;
 
                 return NotFound(errorResponse); 
+            }
+        }
+
+        [HttpGet]
+        public async Task<IActionResult> GetProductos()
+        {
+            try
+            {
+                var query = new GetProductosRequest();
+                var response = await _mediator.Send(query); 
+                
+                return Ok(response);
+            }
+            catch (ProductosListNotFoundException ex)
+            {
+                var errorResponse = ex.ErrorResponse;
+
+                return NotFound(errorResponse);
             }
         }
     }

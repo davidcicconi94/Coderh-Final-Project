@@ -1,6 +1,7 @@
 ﻿using AutoMapper;
 using coder.Application.Domain.Entities;
 using coder.Application.Features.Productos.Queries.GetProducto;
+using coder.Application.Features.Productos.Queries.GetProductos;
 using coder.Application.Features.Usuarios.Commands.CreateUsuario;
 using coder.Application.Features.Usuarios.Commands.DeleteUsuario;
 using coder.Application.Features.Usuarios.Commands.UpdateUsuario;
@@ -48,6 +49,13 @@ namespace coder.Application.Infrastructure.Mapping
             CreateMap<Producto, GetProductoResponse>()
                 .ForMember(dest => dest.Producto, opt => opt.MapFrom(src => src))
                 .ForMember(dest => dest.Message, opt => opt.MapFrom(src => "Producto econtrado correctamente."));
+
+            CreateMap<IEnumerable<Producto>, GetProductosResponse>()
+                .ForMember(dest => dest.Productos, opt => opt.MapFrom(src => src))
+                .ForMember(dest => dest.Message, opt => opt.MapFrom(src => "Usuarios encontrados correctamente."));
+
+
+
             #endregion
 
         }

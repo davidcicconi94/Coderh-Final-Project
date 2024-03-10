@@ -6,12 +6,14 @@ using coder.Application.Features.Productos.Commands.DeleteProduct;
 using coder.Application.Features.Productos.Commands.UpdateProduct;
 using coder.Application.Features.Productos.Queries.GetProducto;
 using coder.Application.Features.Productos.Queries.GetProductos;
+using coder.Application.Features.ProductosVendidos.Queries.GetProductosVendidos;
 using coder.Application.Features.Usuarios.Commands.CreateUsuario;
 using coder.Application.Features.Usuarios.Commands.DeleteUsuario;
 using coder.Application.Features.Usuarios.Commands.UpdateUsuario;
 using coder.Application.Features.Usuarios.Queries.GetUsuario;
 using coder.Application.Features.Usuarios.Queries.GetUsuarioByCredentials;
 using coder.Application.Features.Usuarios.Queries.GetUsuarios;
+using coder.Application.Features.Ventas.Queries.GetVentas;
 
 namespace coder.Application.Infrastructure.Mapping
 {
@@ -86,7 +88,23 @@ namespace coder.Application.Infrastructure.Mapping
 
             CreateMap<Producto, DeleteProductResponse>()
                 .ForMember(dest => dest.Message, opt => opt.MapFrom(src => "Producto eliminado correctamente."));
+            #endregion
 
+            #region ProductosVendidos
+            CreateMap<ProductoVendido, ProductosVendidosDTO>();
+
+            CreateMap<IEnumerable<ProductosVendidosDTO>, GetProductosVendidosResponse>()
+                .ForMember(dest => dest.Message, opt => opt.MapFrom(src => "Productos vendidos encontrados correctamente."))
+                .ForMember(dest => dest.ProductosVendidos, opt => opt.MapFrom(src => src));
+
+            #endregion
+
+            #region Ventas
+            CreateMap<Ventum, VentumDTO>();
+
+            CreateMap<IEnumerable<VentumDTO>, GetVentasResponse>()
+                .ForMember(dest => dest.Message, opt => opt.MapFrom(src => "Ventas encontradas correctamente."))
+                .ForMember(dest => dest.Ventas, opt => opt.MapFrom(src => src));
             #endregion
 
         }

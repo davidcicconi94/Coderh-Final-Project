@@ -1,7 +1,6 @@
 ﻿using AutoMapper;
 using coder.Application.Common.Exceptions.Usuarios;
 using coder.Application.Domain.Entities;
-using coder.Application.Features.Usuarios.Queries.GetUsuario;
 using coder.Application.Infrastructure;
 using MediatR;
 
@@ -18,7 +17,8 @@ namespace coder.Application.Features.Usuarios.Commands.DeleteUsuario
         }
         public async Task<DeleteUsuarioResponse> Handle(DeleteUsuarioRequest request, CancellationToken cancellationToken)
         {
-            DeleteUsuarioResponse usuario = await GetUsuario(request);
+            DeleteUsuarioResponse usuario = await GetUsuario(request); 
+
             return usuario;
         }
         public async Task<DeleteUsuarioResponse> GetUsuario(DeleteUsuarioRequest request)

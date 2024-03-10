@@ -1,9 +1,12 @@
 ﻿using coder.Application.Common.Exceptions.Productos;
+using coder.Application.Common.Exceptions.Usuarios;
 using coder.Application.Features.Productos.Commands.CreateProduct;
+using coder.Application.Features.Productos.Commands.DeleteProduct;
 using coder.Application.Features.Productos.Commands.UpdateProduct;
 using coder.Application.Features.Productos.Queries.GetProducto;
 using coder.Application.Features.Productos.Queries.GetProductos;
 using coder.Application.Features.Usuarios.Commands.CreateUsuario;
+using coder.Application.Features.Usuarios.Commands.DeleteUsuario;
 using coder.Application.Features.Usuarios.Commands.UpdateUsuario;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
@@ -84,6 +87,25 @@ namespace Coderh_Final_Project.Controllers
             catch (Exception ex)
             {
                 return StatusCode(500, new UpdateUsuarioResponse { Message = $"Error al modificar el producto: {ex.Message}" });
+            }
+        }
+
+        [HttpDelete("{id}")]
+        public async Task<IActionResult> DeleteProducto([FromRoute] int id)
+        {
+            try
+            {
+                var query = new DeleteProductRequest { Id = id };
+
+                var response = await _mediator.Send(query);
+
+                return Ok(response);
+            }
+            catch (ProductoNotFoundException ex)
+            {
+                var errorResponse = ex.ErrorResponse;
+
+                return NotFound(errorResponse);
             }
         }
     }

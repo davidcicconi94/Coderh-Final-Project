@@ -6,7 +6,8 @@ using System.Threading.Tasks;
 
 namespace coder.Application.Features.Productos.Commands.DeleteProduct
 {
-    internal class DeleteProductResponse
+    public class DeleteProductResponse
     {
+        public string Message { get; set; }
     }
 }

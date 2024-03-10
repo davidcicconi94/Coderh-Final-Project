@@ -2,6 +2,7 @@
 using coder.Application.Common.DTOs;
 using coder.Application.Domain.Entities;
 using coder.Application.Features.Productos.Commands.CreateProduct;
+using coder.Application.Features.Productos.Commands.DeleteProduct;
 using coder.Application.Features.Productos.Commands.UpdateProduct;
 using coder.Application.Features.Productos.Queries.GetProducto;
 using coder.Application.Features.Productos.Queries.GetProductos;
@@ -82,6 +83,9 @@ namespace coder.Application.Infrastructure.Mapping
                 .ForMember(dest => dest.PrecioVenta, opt => opt.MapFrom(src => src.PrecioVenta))
                 .ForMember(dest => dest.Stock, opt => opt.MapFrom(src => src.Stock))
                 .ForMember(dest => dest.IdUsuario, opt => opt.MapFrom(src => src.IdUsuario));
+
+            CreateMap<Producto, DeleteProductResponse>()
+                .ForMember(dest => dest.Message, opt => opt.MapFrom(src => "Producto eliminado correctamente."));
 
             #endregion
 

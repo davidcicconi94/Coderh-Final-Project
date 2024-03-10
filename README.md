@@ -7,8 +7,10 @@ Proyecto final de Coderhouse del curso de C#
 
 **Patrones de diseño:** CQRS, MediaTR
 
-**Arquitectura:** Verical Slice
+**Arquitectura:** Vertical Slice
 
 **Framework:** Entity Framework
 
 **Approach:** Database First
+
+**Librerias:** Mediatr, AutoMapper
